@@ -1,12 +1,27 @@
+function cleansing (arg) {
+	arg.innerHTML = ''
+}
+function cancellation (arg) {
 
-const input = document.querySelector('.input')
-const nums = [...document.querySelectorAll('.num')]
-const operator = document.querySelectorAll('.calculations')
-const equals = document.querySelector('.equals')
-const clear = document.querySelector('.clear')
-const flag = false;
+	arg = arg.split('')
+	// let a = arg.pop()
+ while (arg.length >0){
+	let a = arg.pop()
+	let b = arg
+	console.log(b); 
+ }
+	
+}
 
 function calc() {
+
+	const input = document.querySelector('.input'),
+		  nums = [...document.querySelectorAll('.num')],
+		  operator = document.querySelectorAll('.calculations'),
+		  equals = document.querySelector('.equals'),
+		  clear = document.querySelector('.clear'),
+		  cancell = document.querySelector('.cancellation')
+	let flag = false;
 
 	for (let i = 0; i < nums.length; i++) {
 		nums[i].addEventListener('click', function (e) {
@@ -53,24 +68,26 @@ function calc() {
 	equals.addEventListener("click", function () {
 
 		const inputString = input.innerHTML;
+		console.log(inputString)
 
 		let numbers = inputString.split(/\+|\-|\×|\÷/g);
 
 		let operators = inputString.replace(/[0-9]|\./g, "").split("");
 
 		let divide = operators.indexOf("÷");
-		while (divide != -1) {
-			numbers.splice(divide, 2, numbers[divide] / numbers[divide + 1]);
-			operators.splice(divide, 1);
-			divide = operators.indexOf("÷");
-		}
+		// while (divide != -1) {
+		// 	console.log(divide);
+		// 	numbers.splice(divide, 2, numbers[divide] / numbers[divide + 1]);
+		// 	operators.splice(divide, 1);
+		// 	divide = operators.indexOf("÷");
+		// }
 
-		let multiply = operators.indexOf("×");
-		while (multiply != -1) {
-			numbers.splice(multiply, 2, numbers[multiply] * numbers[multiply + 1]);
-			operators.splice(multiply, 1);
-			multiply = operators.indexOf("×");
-		}
+		// let multiply = operators.indexOf("×");
+		// while (multiply != -1) {
+		// 	numbers.splice(multiply, 2, numbers[multiply] * numbers[multiply + 1]);
+		// 	operators.splice(multiply, 1);
+		// 	multiply = operators.indexOf("×");
+		// }
 		let subtract = operators.indexOf("-");
 		while (subtract != -1) {
 			numbers.splice(subtract, 2, numbers[subtract] - numbers[subtract + 1]);
@@ -88,7 +105,11 @@ function calc() {
 		flag = true;
 	})
 	clear.addEventListener("click", function () {
-		input.innerHTML = "";
+		cleansing(input)
+	})
+	
+	cancell.addEventListener("click", function () {
+		cancellation(input.innerHTML)
 	})
 	console.log(1);
 	console.log(input.value);

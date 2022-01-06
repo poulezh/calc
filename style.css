@@ -79,7 +79,7 @@ h3{
 }
 .btn{
 	position: relative;
-	display: flex;
+	display: grid;
 	align-items: center;
 	font-size: 60px;
 	width: 100px;
