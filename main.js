@@ -4,13 +4,16 @@ function cleansing (arg) {
 function cancellation (arg) {
 
 	arg = arg.split('')
-	// let a = arg.pop()
- while (arg.length >0){
-	let a = arg.pop()
-	let b = arg
-	console.log(b); 
- }
-	
+	// let a = arg.pop()	
+}
+
+function getResult (sign, operators,numbers) {
+	let costing = operators.indexOf(sign);
+	while (costing != -1) {
+		numbers.splice(costing, 2, numbers[costing] + sign +  numbers[costing + 1]);
+		operators.splice(costing, 1);
+		costing = operators.indexOf(sign);
+	}
 }
 
 function calc() {
@@ -68,13 +71,21 @@ function calc() {
 	equals.addEventListener("click", function () {
 
 		const inputString = input.innerHTML;
-		console.log(inputString)
+		// console.log(inputString + 'inpstr')
 
 		let numbers = inputString.split(/\+|\-|\×|\÷/g);
+		// console.log('num ' + numbers);
 
 		let operators = inputString.replace(/[0-9]|\./g, "").split("");
+		// console.log('oper ' + operators);
 
-		let divide = operators.indexOf("÷");
+		if(operators == '+'){
+			console.log(numbers[1]);
+			console.log(numbers[0]);
+			input.innerHTML = numbers[0] + numbers[1]
+		}
+
+		// let divide = operators.indexOf("÷");
 		// while (divide != -1) {
 		// 	console.log(divide);
 		// 	numbers.splice(divide, 2, numbers[divide] / numbers[divide + 1]);
@@ -88,18 +99,25 @@ function calc() {
 		// 	operators.splice(multiply, 1);
 		// 	multiply = operators.indexOf("×");
 		// }
-		let subtract = operators.indexOf("-");
-		while (subtract != -1) {
-			numbers.splice(subtract, 2, numbers[subtract] - numbers[subtract + 1]);
-			operators.splice(subtract, 1);
-			subtract = operators.indexOf("-");
-		}
-		let add = operators.indexOf("+");
-		while (add != -1) {
-			numbers.splice(add, 2, parseFloat(numbers[add]) + parseFloat(numbers[add + 1]));
-			operators.splice(add, 1);
-			add = operators.indexOf("+");
-		}
+
+
+		getResult('-', operators, numbers)
+		getResult('+', operators, numbers)
+		getResult('*', operators, numbers)
+		getResult('/', operators, numbers)
+
+		// let subtract = operators.indexOf("-");
+		// while (subtract != -1) {
+		// 	numbers.splice(subtract, 2, numbers[subtract] - numbers[subtract + 1]);
+		// 	operators.splice(subtract, 1);
+		// 	subtract = operators.indexOf("-");
+		// }
+		// let add = operators.indexOf("+");
+		// while (add != -1) {
+		// 	numbers.splice(add, 2, parseFloat(numbers[add]) + parseFloat(numbers[add + 1]));
+		// 	operators.splice(add, 1);
+		// 	add = operators.indexOf("+");
+		// }
 
 		input.innerHTML = numbers[0];
 		flag = true;
@@ -109,9 +127,7 @@ function calc() {
 	})
 	
 	cancell.addEventListener("click", function () {
-		cancellation(input.innerHTML)
+		cleansing(input)
 	})
-	console.log(1);
-	console.log(input.value);
 }
 calc()
